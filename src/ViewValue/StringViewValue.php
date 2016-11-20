@@ -4,7 +4,8 @@ namespace AutoEscape\ViewValue;
 
 use \AutoEscape\ViewValue;
 
-class StringViewValue extends ViewValue {
+class StringViewValue extends ViewValue
+{
 
     protected $_type = 'string';
 
@@ -17,7 +18,8 @@ class StringViewValue extends ViewValue {
      *
      * @return string sanitized value
      */
-    public function __toString() {
+    public function __toString()
+    {
         if (!$this->_clean) {
             $this->_clean = call_user_func(self::$callback, $this->_value);
         }

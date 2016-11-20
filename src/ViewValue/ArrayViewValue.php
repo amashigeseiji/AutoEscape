@@ -15,7 +15,8 @@ use \AutoEscape\ViewValue;
  * @see Countable
  * @see ViewValue
  */
-class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate, Countable {
+class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate, Countable
+{
 
     protected $_type = 'array';
 
@@ -26,7 +27,8 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      *
      * @return void
      */
-    public function getIterator() {
+    public function getIterator()
+    {
         foreach ($this->_value as $key => $value) {
             yield $key => ViewValue::factory($value);
         }
@@ -38,7 +40,8 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      * @param string|int $key offset
      * @return mixed|null
      */
-    public function offsetGet($key) {
+    public function offsetGet($key)
+    {
         return $this->offsetExists($key) ? ViewValue::factory($this->_value[$key]) : null;
     }
 
@@ -52,7 +55,8 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      * @return void
      * @throws LogicException
      */
-    public function offsetSet($key, $value = null) {
+    public function offsetSet($key, $value = null)
+    {
         throw new \LogicException(__METHOD__ . ' is not allowed.');
     }
 
@@ -62,7 +66,8 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      * @param string|int $key offset
      * @return bool
      */
-    public function offsetExists($key) {
+    public function offsetExists($key)
+    {
         return array_key_exists($key, $this->_value);
     }
 
@@ -72,7 +77,8 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      * @param string|int $key offset
      * @return void
      */
-    public function offsetUnset($key) {
+    public function offsetUnset($key)
+    {
         unset($this->_value[$key]);
     }
 
@@ -81,7 +87,8 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      *
      * @return int
      */
-    public function count() {
+    public function count()
+    {
         return count($this->_value);
     }
 }

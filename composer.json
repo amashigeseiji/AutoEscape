@@ -9,8 +9,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "AutoEscape\\": "src/",
-            "AutoEscape\\ViewValue\\": "src/ViewValue/"
+            "AutoEscape\\": "src/"
         }
     }
 }
