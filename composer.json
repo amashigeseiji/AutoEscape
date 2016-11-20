@@ -1,0 +1,16 @@
+{
+    "name": "amashigeseiji/auto-escape",
+    "authors": [
+        {
+            "name": "amashigeseiji",
+            "email": "tenjuu99@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "AutoEscape\\": "src/",
+            "AutoEscape\\ViewValue\\": "src/ViewValue/"
+        }
+    }
+}
