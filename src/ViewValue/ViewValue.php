@@ -8,17 +8,20 @@ abstract class ViewValue {
 
     protected $_type;
 
+    protected $callback;
+
     /**
      * constructor
      *
      * @param mixed $value value
      * @throws LogicException
      */
-    public function __construct($value) {
+    public function __construct($value, $callback) {
         if (gettype($value) !== $this->_type) {
             throw new \LogicException('type is not expected.');
         }
         $this->_value = $value;
+        $this->callback = $callback;
     }
 
     /**
@@ -29,7 +32,7 @@ abstract class ViewValue {
      * @param string $value this method allow only string value
      * @return string sanitized
      */
-    protected static function _h($value) {
+    public static function _h($value) {
         return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     }
 

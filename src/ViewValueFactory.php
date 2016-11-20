@@ -17,7 +17,7 @@ class ViewValueFactory
      * @param mixed $value
      * @return mixed
      */
-    public static function create($value) {
+    public static function create($value, $escapeCallback = null) {
         if ($value instanceof ViewValue) {
             return $value;
         }
@@ -26,7 +26,8 @@ class ViewValueFactory
         $file = __DIR__ . '/ViewValue/' . ucfirst($type) . 'ViewValue.php';
         if (!empty($value) && file_exists($file)) {
             $className = '\AutoEscape\ViewValue\\' . ucfirst($type) . 'ViewValue';
-            return new $className($value);
+            $callback = is_callable($escapeCallback, true, $callable) ? $callable : [$className, '_h'];
+            return new $className($value, $callback);
         }
 
         return $value;

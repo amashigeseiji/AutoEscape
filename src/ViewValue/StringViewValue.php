@@ -16,19 +16,8 @@ class StringViewValue extends ViewValue {
      * @return string sanitized value
      */
     public function __toString() {
-        return $this->clean();
-    }
-
-    /**
-     * clean
-     *
-     * sanitize given value
-     *
-     * @return string sanitized value
-     */
-    public function clean() {
         if (!$this->_clean) {
-            $this->_clean = $this->_h($this->_value);
+            $this->_clean = call_user_func($this->callback, $this->_value);
         }
         return $this->_clean;
     }
