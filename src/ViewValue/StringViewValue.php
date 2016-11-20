@@ -2,6 +2,8 @@
 
 namespace AutoEscape\ViewValue;
 
+use \AutoEscape\ViewValue;
+
 class StringViewValue extends ViewValue {
 
     protected $_type = 'string';
