@@ -5,7 +5,7 @@ namespace AutoEscape\ViewValue;
 use \ArrayAccess;
 use \IteratorAggregate;
 use \Countable;
-use \AutoEscape\ViewValueFactory;
+use \AutoEscape\ViewValue;
 
 /**
  * ArrayViewValue
@@ -28,7 +28,7 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      */
     public function getIterator() {
         foreach ($this->_value as $key => $value) {
-            yield $key => ViewValueFactory::create($value);
+            yield $key => ViewValue::factory($value);
         }
     }
 
@@ -39,7 +39,7 @@ class ArrayViewValue extends ViewValue implements ArrayAccess, IteratorAggregate
      * @return mixed|null
      */
     public function offsetGet($key) {
-        return $this->offsetExists($key) ? ViewValueFactory::create($this->_value[$key]) : null;
+        return $this->offsetExists($key) ? ViewValue::factory($this->_value[$key]) : null;
     }
 
     /**

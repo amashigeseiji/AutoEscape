@@ -2,7 +2,7 @@
 
 namespace AutoEscape\ViewValue;
 
-use \AutoEscape\ViewValueFactory;
+use \AutoEscape\ViewValue;
 
 /**
  * ObjectViewValue
@@ -22,7 +22,7 @@ class ObjectViewValue extends ViewValue
      */
     public function __get($key)
     {
-        return ViewValueFactory::create($this->_value->$key);
+        return ViewValue::factory($this->_value->$key);
     }
 
     /**
@@ -34,6 +34,6 @@ class ObjectViewValue extends ViewValue
      */
     public function __call($name, $args = null)
     {
-        return ViewValueFactory::create(call_user_func_array([$this->_value, $name], $args));
+        return ViewValue::factory(call_user_func_array([$this->_value, $name], $args));
     }
 }
