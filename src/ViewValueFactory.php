@@ -25,7 +25,7 @@ class ViewValueFactory
         $type = gettype($value);
         $file = __DIR__ . '/ViewValue/' . ucfirst($type) . 'ViewValue.php';
         if (!empty($value) && file_exists($file)) {
-            $className = ucfirst($type) . 'ViewValue';
+            $className = '\AutoEscape\ViewValue\\' . ucfirst($type) . 'ViewValue';
             return new $className($value);
         }
 
