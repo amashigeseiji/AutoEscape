@@ -19,7 +19,7 @@ class StringViewValue extends ViewValue {
      */
     public function __toString() {
         if (!$this->_clean) {
-            $this->_clean = call_user_func($this->callback, $this->_value);
+            $this->_clean = call_user_func(self::$callback, $this->_value);
         }
         return $this->_clean;
     }

@@ -15,7 +15,7 @@ abstract class ViewValue
 
     protected $_type;
 
-    protected $callback;
+    protected static $callback = [self, '_h'];
 
     /**
      * constructor
@@ -23,13 +23,12 @@ abstract class ViewValue
      * @param mixed $value value
      * @throws LogicException
      */
-    public function __construct($value, $callback)
+    public function __construct($value)
     {
         if (gettype($value) !== $this->_type) {
             throw new \LogicException('type is not expected.');
         }
         $this->_value = $value;
-        $this->callback = $callback;
     }
 
     /**
@@ -56,12 +55,24 @@ abstract class ViewValue
     }
 
     /**
+     * setCallback
+     *
+     * @param callable $callback
+     */
+    public static function setCallback($callback)
+    {
+        if (is_callable($callback, true, $callable)) {
+            self::$callback = $callable;
+        }
+    }
+
+    /**
      * create
      *
      * @param mixed $value
      * @return mixed
      */
-    public static function factory($value, $escapeCallback = null)
+    public static function factory($value)
     {
         if ($value instanceof ViewValue) {
             return $value;
@@ -71,8 +82,7 @@ abstract class ViewValue
         $file = __DIR__ . '/ViewValue/' . ucfirst($type) . 'ViewValue.php';
         if (!empty($value) && file_exists($file)) {
             $className = '\AutoEscape\ViewValue\\' . ucfirst($type) . 'ViewValue';
-            $callback = is_callable($escapeCallback, true, $callable) ? $callable : [$className, '_h'];
-            return new $className($value, $callback);
+            return new $className($value);
         }
 
         return $value;
