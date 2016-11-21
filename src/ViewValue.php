@@ -15,7 +15,7 @@ abstract class ViewValue
 
     protected $_type;
 
-    protected static $callback = [self, '_h'];
+    protected static $callback = ['\AutoEscape\ViewValue', '_h'];
 
     /**
      * constructor
