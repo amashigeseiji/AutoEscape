@@ -31,9 +31,13 @@ class ObjectViewValue extends ViewValue
      * @param string $name method name
      * @param array $args method arguments
      * @return mixed
+     * @throws BadMethodCallException
      */
     public function __call($name, $args = null)
     {
+        if (!is_callable([$this->_value, $name])) {
+            throw new \BadMethodCallException(__METHOD__ . ' invalid method is called. ' . get_class($this->_value) . '::' . $name);
+        }
         return ViewValue::factory(call_user_func_array([$this->_value, $name], $args));
     }
 }
